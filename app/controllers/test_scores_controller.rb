@@ -3,7 +3,11 @@ class TestScoresController < ApplicationController
 
   # GET /test_scores
   def index
-    @test_scores = TestScore.all
+    @test_scores = TestScore
+    if (params[:student_id])
+      @test_scores = @test_scores.where(student_id: params[:student_id])
+    end
+    @test_scores = @test_scores.all
 
     render json: @test_scores
   end
@@ -46,6 +50,6 @@ class TestScoresController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def test_score_params
-      params.require(:test_score).permit(:name, :score, :student_id)
+      params.require(:test_score).permit(:name, :score, :max_score, :student_id)
     end
 end

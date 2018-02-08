@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20180208200702) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "students", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -30,4 +33,5 @@ ActiveRecord::Schema.define(version: 20180208200702) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "test_scores", "students"
 end
